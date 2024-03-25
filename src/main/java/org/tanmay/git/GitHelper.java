@@ -1,6 +1,7 @@
 package org.tanmay.git;
 
 import org.eclipse.jgit.api.*;
+import org.eclipse.jgit.transport.FetchResult;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import java.io.File;
@@ -34,6 +35,9 @@ public class GitHelper {
             case 2:
                 helper.pull();
                 break;
+            case 3:
+                helper.fetch();
+                break;
             default:
                 throw new IllegalArgumentException("Invalid mode has been passed. Mode 1 = push and 2 = pull");
         }
@@ -55,6 +59,14 @@ public class GitHelper {
             result.getFetchResult().submoduleResults().forEach(
                     (key, value) -> System.out.printf("FETCHED RESULT : %s, %s%n", key , value.getMessages()));
             System.out.printf("MERGE RESULTS %s", result.getMergeResult().getMergeStatus());
+        }
+    }
+    private void fetch() throws Exception {
+        try (Git git  = Git.open(new File(path))) {
+            final FetchCommand command = git.fetch();
+            final FetchResult result = processTransport(command);
+            result.submoduleResults().forEach(
+                    (key, value) -> System.out.printf("FETCHED RESULT : %s, %s%n", key , value.getMessages()));
         }
     }
 
