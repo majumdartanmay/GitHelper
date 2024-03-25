@@ -19,6 +19,7 @@
         <version>3.5.2</version>
         <executions>
           <execution>
+            <id>CustomGitPusher</id>
             <phase>package</phase>
             <goals>
               <goal>shade</goal>
@@ -36,7 +37,31 @@
               </filters>
               <transformers>
                 <transformer>
-                  <mainClass>org.tanmay.git.Main</mainClass>
+                  <mainClass>org.tanmay.git.GitHelper</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+          <execution>
+            <id>CustomGitPuller</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <transformers>
+                <transformer>
+                  <mainClass>org.tanmay.git.GitPuller</mainClass>
                 </transformer>
               </transformers>
             </configuration>
