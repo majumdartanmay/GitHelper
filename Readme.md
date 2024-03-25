@@ -3,6 +3,7 @@
 I manage multiple users  with multiple repositories in my local system. This utility will help me manage different repositories with minimal cross concerns.
 This utility basically pushes your last commit , but you have explicitly add your username and password while pushing.
 
+
 # CI/CD
 
 We will describe how to package the utility
@@ -28,6 +29,8 @@ mvn package
 This should create a jar file
 
 # Running the jar
+
+You need at least java 11 to run this
 
 ` java -jar <generated_jar> <username> <password> <repo_path> `
 
