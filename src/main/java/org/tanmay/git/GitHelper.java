@@ -1,6 +1,7 @@
 package org.tanmay.git;
 
 import org.eclipse.jgit.api.*;
+import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.transport.FetchResult;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
@@ -53,20 +54,24 @@ public class GitHelper {
     }
 
     private void pull() throws Exception {
+        printLastLog();
         try (Git git  = Git.open(new File(path))) {
             PullCommand command = git.pull();
             PullResult result = processTransport(command);
             result.getFetchResult().submoduleResults().forEach(
                     (key, value) -> System.out.printf("FETCHED RESULT : %s, %s%n", key , value.getMessages()));
             System.out.printf("MERGE RESULTS %s", result.getMergeResult().getMergeStatus());
+            printLastLog();
         }
     }
     private void fetch() throws Exception {
+        printLastLog();
         try (Git git  = Git.open(new File(path))) {
             final FetchCommand command = git.fetch();
             final FetchResult result = processTransport(command);
             result.submoduleResults().forEach(
                     (key, value) -> System.out.printf("FETCHED RESULT : %s, %s%n", key , value.getMessages()));
+            printLastLog();
         }
     }
 
@@ -76,5 +81,18 @@ public class GitHelper {
     }
     private static boolean isEmpty(final String st) {
         return st == null || st.isEmpty();
+    }
+
+    private void printLastLog() throws Exception {
+        try (Git git  = Git.open(new File(path))) {
+            final LogCommand command = git.log().setMaxCount(2);
+            for (final RevCommit commit : command.call()) {
+                printMessage(commit.toString());
+            }
+        }
+    }
+
+    private static void printMessage(final String s) {
+        System.out.printf("\n----------%s---------\n", s);
     }
 }
