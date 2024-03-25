@@ -31,12 +31,15 @@ public class GitHelper {
 
         switch(mode) {
             case 1:
+                System.out.println("Attempting push");
                 helper.push();
                 break;
             case 2:
+                System.out.println("Attempting pull");
                 helper.pull();
                 break;
             case 3:
+                System.out.println("Attempting fetch");
                 helper.fetch();
                 break;
             default:
