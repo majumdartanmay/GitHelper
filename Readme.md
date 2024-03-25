@@ -34,3 +34,9 @@ You need at least java 11 to run this
 
 ` java -jar <generated_jar> <username> <password> <repo_path> `
 
+This should print the result in this format
+
+`RemoteRefUpdate[remoteName=refs/heads/main, OK, 24eaf094c361fa78d17567b6e96514cfdea6aa0e...5bbf4e101d128f7ff8d99034350a9272b7e4e8f9, fastForward, srcRef=refs/heads/main, message=null]`
+
+To understand what each status mean go to the Jgit `RemoteRefUpdate` [documentation](https://archive.eclipse.org/jgit/docs/jgit-2.0.0.201206130900-r/apidocs/org/eclipse/jgit/transport/RemoteRefUpdate.Status.html).
+
