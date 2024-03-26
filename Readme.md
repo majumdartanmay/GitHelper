@@ -32,7 +32,15 @@ This should create a jar file
 
 You need at least java 11 to run this
 
-` java -jar <generated_jar> <username> <password> <repo_path> `
+` java -jar <generated_jar> <username> <password> <repo_path> <operation> `
+
+----
+
+| Operation    | Description |
+| -------- | ------- |
+| 1   | Push    |
+| 2 | Pull     |
+| 3    | Fetch    |
 
 This should print the result in this format
 
