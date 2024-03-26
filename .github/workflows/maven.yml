@@ -29,6 +29,8 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Checkout to test branch
+      run: git checkout test-branch 
     - name: Add commit id in test file
       run: echo ${GITHUB_SHA} >> test/test.txt
     - name: Push test code
