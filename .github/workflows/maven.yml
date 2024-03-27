@@ -34,7 +34,7 @@ jobs:
     - name: Print metadata2
       run: echo hello2 & echo $(ls)
     - name: Create temp folder for jar file
-      run: cp target/GitHelper-1.0-SNAPSHOT-shaded.jar ../jar_file
+      run: cp $(pwd)/target/GitHelper-1.0-SNAPSHOT-shaded.jar ../jar_file
     - name: Checkout to test branch
       run: git fetch && git checkout test_auto_branch
     - name: Add commit id in test file
