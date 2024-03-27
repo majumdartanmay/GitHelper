@@ -30,7 +30,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Print metadata
-      run: mkdir ../jar_file && echo $(ls ..)
+      run: mkdir ../jar_file && echo $(ls target)
     - name: Print metadata2
       run: echo hello2 & echo $(ls)
     - name: Create temp folder for jar file
