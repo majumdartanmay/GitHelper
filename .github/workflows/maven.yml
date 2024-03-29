@@ -37,8 +37,14 @@ jobs:
     - name: Print metadata2
       run: echo hello2 && git config user.email "tanmay.majumdar@hotmail.com"
       
+    - name: Print metadata3
+      run: export JAR_NAME=GitHelper-1.0-SNAPSHOT-shaded.jar
+
+    - name: Print metadata4
+      run: echo $JAR_NAME jar name
+      
     - name: Create temp folder for jar file
-      run: cp $(pwd)/target/GitHelper-1.0-SNAPSHOT.jar ../jar_file
+      run: cp $(pwd)/target/$JAR_NAME ../jar_file
       
     - name: Checkout to test branch
       run: git fetch && git checkout test_auto_branch
@@ -53,4 +59,4 @@ jobs:
       run: git commit -m "[AUTO_ENTRY] Test file" 
       
     - name: Push test code
-      run: cp ../jar_file/GitHelper-1.0-SNAPSHOT.jar . && java -jar GitHelper-1.0-SNAPSHOT.jar majumdartanmay ${{ secrets.CUSTOM_ACCESS_TOKEN }} $(pwd) 1
+      run: cp ../jar_file/$JAR_NAME . && java -jar $JAR_FILE majumdartanmay ${{ secrets.CUSTOM_ACCESS_TOKEN }} $(pwd) 1
