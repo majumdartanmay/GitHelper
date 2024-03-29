@@ -23,6 +23,7 @@ public class GitHelper {
         helper.password = args[1];
         helper.path = args[2];
 
+        System.out.println(String.format("PWD : %s", helper.path));
         final int mode = Integer.parseInt(args[3]);
 
         if (isEmpty(helper.username) || isEmpty(helper.password)) {
