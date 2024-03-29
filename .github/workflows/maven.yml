@@ -10,7 +10,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "pipeline" ]
   pull_request:
     branches: [ "main" ]
 
@@ -27,17 +27,24 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+        
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      
     - name: Print metadata
-      run: mkdir ../jar_file && echo $(ls target)
+      run: mkdir ../jar_file && git config user.name
+      
     - name: Print metadata2
-      run: echo hello2 & echo $(ls)
+      run: echo hello2 && git config user.email
+      
     - name: Create temp folder for jar file
       run: cp $(pwd)/target/GitHelper-1.0-SNAPSHOT.jar ../jar_file
+      
     - name: Checkout to test branch
       run: git fetch && git checkout test_auto_branch
+      
     - name: Add commit id in test file
       run: echo ${GITHUB_SHA} >> test/test.txt
+      
     - name: Push test code
       run: java -jar ../jar_file/GitHelper-1.0-SNAPSHOT.jar majumdartanmay ${{ secrets.CUSTOM_ACCESS_TOKEN }} $(pwd) 1
