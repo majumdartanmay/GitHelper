@@ -44,7 +44,13 @@ jobs:
       run: git fetch && git checkout test_auto_branch
       
     - name: Add commit id in test file
-      run: echo ${GITHUB_SHA} >> test/test.txt && git commit -a "[AUTO_ENTRY] Create test entry"
+      run: echo ${GITHUB_SHA} >> test/test.txt 
+
+    - name: Git add 
+      run: git add .
+
+    - name: Git commmit
+      run: git commit -m "[AUTO_ENTRY] Test file" 
       
     - name: Push test code
       run: echo $(pwd) && java -jar ../jar_file/GitHelper-1.0-SNAPSHOT.jar majumdartanmay ${{ secrets.CUSTOM_ACCESS_TOKEN }} $(pwd) 1
