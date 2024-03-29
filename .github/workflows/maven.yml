@@ -53,4 +53,4 @@ jobs:
       run: git commit -m "[AUTO_ENTRY] Test file" 
       
     - name: Push test code
-      run: echo $(pwd) && java -jar ../jar_file/GitHelper-1.0-SNAPSHOT.jar majumdartanmay ${{ secrets.CUSTOM_ACCESS_TOKEN }} $(pwd) 1
+      run: cp ../jar_file/GitHelper-1.0-SNAPSHOT.jar . && java -jar GitHelper-1.0-SNAPSHOT.jar majumdartanmay ${{ secrets.CUSTOM_ACCESS_TOKEN }} $(pwd) 1
