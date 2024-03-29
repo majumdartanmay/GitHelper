@@ -32,7 +32,7 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: Print metadata
-      run: mkdir ../jar_file && git config user.name "majumdartanmay"
+      run: mkdir ../jar_file && git remote -v && git config user.name "majumdartanmay"
       
     - name: Print metadata2
       run: echo hello2 && git config user.email "tanmay.majumdar@hotmail.com"
