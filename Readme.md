@@ -1,4 +1,4 @@
-# Introduction
+# Introduction [![Git push test](https://github.com/majumdartanmay/GitHelper/actions/workflows/maven.yml/badge.svg)](https://github.com/majumdartanmay/GitHelper/actions/workflows/maven.yml)
 
 This is a utility which will manually feed the username and password while performing various git operations.
 
