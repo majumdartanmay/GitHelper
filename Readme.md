@@ -1,8 +1,12 @@
 # Introduction
 
-I manage multiple users  with multiple repositories in my local system. This utility will help me manage different repositories with minimal cross concerns.
-This utility basically pushes your last commit , but you have explicitly add your username and password while pushing.
+This is a utility which will manually feed the username and password while performing various git operations.
 
+## Philosophy
+
+I am often pushing and fetching from private repositories which belong to multiple different users. As a windows user, I had lot of trouble managing credentials using the [Git Credential Manager](https://github.blog/2022-04-07-git-credential-manager-authentication-for-everyone/). Maybe I am wrong, but it seemed it saves credentials on a global context, which creates problems when you are managing multiple set of credentials.
+
+The other alternative is using SSH. I am trying to avoid managing multiple private keys, since they reside on your local system and you need to manage them separately if you are using a different system.
 
 # CI/CD
 
