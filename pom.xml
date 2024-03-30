@@ -57,7 +57,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>                            
                             <filters>
                                 <filter>
                                     <artifact>*:*</artifact>

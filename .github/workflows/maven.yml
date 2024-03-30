@@ -1,18 +1,13 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "pipeline" ]
   pull_request:
     branches: [ "main" ]
+
+env:
+  JAR_NAME: GitHelper-1.0-SNAPSHOT-shaded.jar
 
 jobs:
   build:
@@ -27,17 +22,27 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+        
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      
     - name: Print metadata
-      run: mkdir ../jar_file && echo $(ls target)
-    - name: Print metadata2
-      run: echo hello2 & echo $(ls)
+      run: mkdir ../jar_file && git remote -v && git config user.name "majumdartanmay" && git config user.email "tanmay.majumdar@hotmail.com"
+      
     - name: Create temp folder for jar file
-      run: cp $(pwd)/target/GitHelper-1.0-SNAPSHOT.jar ../jar_file
+      run: cp $(pwd)/target/${{env.JAR_NAME}} ../jar_file
+      
     - name: Checkout to test branch
       run: git fetch && git checkout test_auto_branch
+      
     - name: Add commit id in test file
-      run: echo ${GITHUB_SHA} >> test/test.txt
+      run: echo ${GITHUB_SHA} >> test/test.txt 
+
+    - name: Git add 
+      run: git add .
+
+    - name: Git commmit
+      run: git commit -m "[AUTO_ENTRY] Test file" 
+      
     - name: Push test code
-      run: java -jar ../jar_file/GitHelper-1.0-SNAPSHOT.jar majumdartanmay ${{ secrets.CUSTOM_ACCESS_TOKEN }} $(pwd) 1
+      run: cp ../jar_file/${{env.JAR_NAME}} . && java -jar ${{env.JAR_NAME}} majumdartanmay ${{ secrets.CUSTOM_ACCESS_TOKEN }} $(pwd) 1

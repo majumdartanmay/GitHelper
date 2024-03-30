@@ -23,13 +23,13 @@ public class GitHelper {
         helper.password = args[1];
         helper.path = args[2];
 
-        System.out.println(String.format("PWD : %s", helper.path));
         final int mode = Integer.parseInt(args[3]);
 
         if (isEmpty(helper.username) || isEmpty(helper.password)) {
             throw new RuntimeException("Username or password not provided");
         }
 
+        System.out.printf("PWD is %s", helper.path);
         switch(mode) {
             case 1:
                 System.out.println("Attempting push");
