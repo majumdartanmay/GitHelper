@@ -29,6 +29,7 @@ public class GitHelper {
             throw new RuntimeException("Username or password not provided");
         }
 
+        System.out.printf("PWD is %s", helper.path);
         switch(mode) {
             case 1:
                 System.out.println("Attempting push");
