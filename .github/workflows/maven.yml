@@ -35,7 +35,7 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: Print metadata
-      run: mkdir ../jar_file && git remote -v && git config user.name "majumdartanmay" && git config user.name "tanmay.majumdar@hotmail.com"
+      run: mkdir ../jar_file && git remote -v && git config user.name "majumdartanmay" && git config user.email "tanmay.majumdar@hotmail.com"
       
     - name: Create temp folder for jar file
       run: cp $(pwd)/target/${{env.JAR_NAME}} ../jar_file
