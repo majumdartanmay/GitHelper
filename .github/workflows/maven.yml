@@ -53,4 +53,4 @@ jobs:
       run: git commit -m "[AUTO_ENTRY] Test file" 
       
     - name: Push test code
-      run: cp ../jar_file/${{env.JAR_NAME}} . && java -jar $${{JAR_FILE}} majumdartanmay ${{ secrets.CUSTOM_ACCESS_TOKEN }} $(pwd) 1
+      run: cp ../jar_file/${{env.JAR_NAME}} . && java -jar $${{env.JAR_NAME}} majumdartanmay ${{ secrets.CUSTOM_ACCESS_TOKEN }} $(pwd) 1
