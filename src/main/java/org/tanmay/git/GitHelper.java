@@ -1,6 +1,12 @@
 package org.tanmay.git;
 
-import org.eclipse.jgit.api.*;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.PushCommand;
+import org.eclipse.jgit.api.PullCommand;
+import org.eclipse.jgit.api.LogCommand;
+import org.eclipse.jgit.api.FetchCommand;
+import org.eclipse.jgit.api.PullResult;
+import org.eclipse.jgit.api.TransportCommand;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.transport.FetchResult;
 import org.eclipse.jgit.transport.PushResult;
@@ -32,15 +38,12 @@ public class GitHelper {
         System.out.printf("PWD is %s", helper.path);
         switch(mode) {
             case 1:
-                System.out.println("Attempting push");
                 helper.push();
                 break;
             case 2:
-                System.out.println("Attempting pull");
                 helper.pull();
                 break;
             case 3:
-                System.out.println("Attempting fetch");
                 helper.fetch();
                 break;
             default:
@@ -49,6 +52,8 @@ public class GitHelper {
     }
 
     private void push() throws Exception {
+        System.out.println("Attempting push");
+
         try (Git git  = Git.open(new File(path))) {
             PushCommand pushCommand = git.push();
             for (PushResult result : processTransport(pushCommand))  {
@@ -58,7 +63,9 @@ public class GitHelper {
     }
 
     private void pull() throws Exception {
+        System.out.println("Attempting pull");
         printLastLog();
+
         try (Git git  = Git.open(new File(path))) {
             PullCommand command = git.pull();
             PullResult result = processTransport(command);
@@ -68,8 +75,11 @@ public class GitHelper {
             printLastLog();
         }
     }
+
     private void fetch() throws Exception {
+        System.out.println("Attempting fetch");
         printLastLog();
+
         try (Git git  = Git.open(new File(path))) {
             final FetchCommand command = git.fetch();
             final FetchResult result = processTransport(command);
@@ -83,6 +93,7 @@ public class GitHelper {
         command.setCredentialsProvider(new UsernamePasswordCredentialsProvider(username, password));
         return command.call();
     }
+
     private static boolean isEmpty(final String st) {
         return st == null || st.isEmpty();
     }
